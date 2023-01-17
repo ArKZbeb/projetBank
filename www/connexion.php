@@ -7,7 +7,7 @@ require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 
 <body>
     <div>
-        <h1>Inscription</h1>
+        <h1>Connexion</h1>
     </div>
     <div>
         <form action="inscription.php" method="post">
