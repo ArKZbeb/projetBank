@@ -1,8 +1,7 @@
 <?php
 session_start();
 $page_title = 'Home page';
-require_once __DIR__ . '/../src/html_head_zebank.php';
-
+require_once __DIR__ . '/.../src/templates/partials/html_head_zebank.php';
 ?>
 <body>
 
