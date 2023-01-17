@@ -1,7 +1,7 @@
 <!-- faire une page de connexion d'un utilisateur de la banque-->
 <?php
 session_start();
-$page_title = 'Inscription';
+$page_title = 'Connexion';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 ?>
 
@@ -10,7 +10,7 @@ require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
         <h1>Connexion</h1>
     </div>
     <div>
-        <form action="inscription.php" method="post">
+        <form action="connexion.php" method="post">
             
             <div>
                 <label for="email">identifiant</label>
