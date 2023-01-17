@@ -46,7 +46,7 @@ class DbManager {
         $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
         return $hihi->fetchAll();
     }
-    
+
     function select(string $sql, array $data, string $className) {
         $hihi = $this -> db -> prepare($sql);
         $hihi->execute($data);
@@ -104,6 +104,7 @@ class DbManager {
         $hihi = $this->db->prepare($sql);
         $hihi ->execute($data);
     }
+    
     // function update(string $tableName, array $data)
     // {
     //     $sql = "UPDATE " . $tableName . " SET ";
