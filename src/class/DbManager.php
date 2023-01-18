@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__ . '/DbObject.php';
+require_once __DIR__ . '/users.php';
 
 /**
  * La classe DbManager doit pouvoir gérer n'importe quelle table de votre base de donnée
@@ -17,12 +17,13 @@ class DbManager {
 
     // return l'id inseré
     function insert(string $sql, array $data) {
-        $this->db->prepare($sql)
-        ->execute($data);
+        $hihi = $this -> db -> prepare($sql);
+        $hihi->execute($data);
+        return $this->db->lastInsertId();
+
     }
 
     function insert_advanced(DbObject $dbObj) {
-        // INSERT INTO contactform(fullname, phone, email, message) VALUES(?, ?, ?, ?)
         $class = strtolower(get_class($dbObj));
         $sql = 'INSERT INTO ' . $class. ' (';
         $columns = [];
@@ -45,7 +46,6 @@ class DbManager {
         $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
         return $hihi->fetchAll();
     }
-
 
     function getById_advanced($id, string $className) {
         $class = strtolower($className);
@@ -97,7 +97,7 @@ class DbManager {
         $hihi = $this->db->prepare($sql);
         $hihi ->execute($data);
     }
-    
+
     // function update(string $tableName, array $data)
     // {
     //     $sql = "UPDATE " . $tableName . " SET ";
@@ -124,6 +124,56 @@ class DbManager {
         $data = get_object_vars($dbObj);
         $this->update($tableName, $data);
         var_dump($data);
+    }
+
+    // CREATE TABLE `users` (
+    //     `id_user` int(11) NOT NULL,
+    //     `id_account` int(11) NOT NULL,
+    //     `nom` varchar(255) NOT NULL,
+    //     `prenom` varchar(255) NOT NULL,
+    //     `telephone` int(11) NOT NULL,
+    //     `email` varchar(255) NOT NULL,
+    //     `password` varchar(255) NOT NULL,
+    //     `role` varchar(255) NOT NULL,
+    //     `created_at` datetime NOT NULL
+    //   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+      
+    function create_account(dbObject $dbObj) {
+        $tableName = strtolower(get_class($dbObj));
+        echo $tableName;
+        $data = get_object_vars($dbObj);
+        $sql = 'INSERT INTO ' . $tableName . ' (';
+        $columns = [];
+        $values = [];
+        foreach ($data as $key => $value) {
+            if (!empty($value)) {
+                $columns[] = $key;
+                $values[] = $value;
+            }
+        }
+        $sql .= implode(', ', $columns);
+        $sql .= ') VALUES (';
+        $sql .= implode(', ', array_fill(0, count($values), '?'));
+        $sql .= ')';
+        return $this->insert($sql, $values);
+    }
+    function create_bank_account(dbObject $dbObj) {
+        $tableName = strtolower(get_class($dbObj));
+        $data = get_object_vars($dbObj);
+        $sql = 'INSERT INTO ' . $tableName . ' (';
+        $columns = [];
+        $values = [];
+        foreach ($data as $key => $value) {
+            if (!empty($value)) {
+                $columns[] = $key;
+                $values[] = $value;
+            }
+        }
+        $sql .= implode(', ', $columns);
+        $sql .= ') VALUES (';
+        $sql .= implode(', ', array_fill(0, count($values), '?'));
+        $sql .= ')';
+        $this->insert($sql, $values);
     }
 
 }
