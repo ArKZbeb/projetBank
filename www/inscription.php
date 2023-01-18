@@ -10,29 +10,32 @@ function hash_password($password) {
 
 if(isset($_POST['inscription']))
 {
-   $nom = $_POST['nom'];
-   $prenom = $_POST['prenom'];
-   $telephone = $_POST['telephone'];
-   $email = $_POST['email'];
-   $password = $_POST['password'];
-   $password_retype = $_POST['password_retype'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $telephone = $_POST['telephone'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password_retype = $_POST['password_retype'];
 
-   if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
     
             if($password_retype == $password){
+                $password = hash_password($password);
                 $new_member_form = new users();
                 $new_member_form->nom = $_POST['nom'];
                 $new_member_form->prenom = $_POST['prenom'];
                 $new_member_form->telephone = $_POST['telephone'];
                 $new_member_form->email = $_POST['email'];
-                $new_member_form->password = $_POST['password'];
+                $new_member_form->password = $password;
                 $idNewMember = $dbManager-> insert_advanced($new_member_form);
                 
                 header('Location:./connexion.php');
 
 }}
 }
-?>
+else{
+    echo "Veuillez remplir tous les champs";
+}
 
 <body>
     <div>
