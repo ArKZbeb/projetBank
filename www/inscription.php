@@ -9,12 +9,12 @@ function hash_password($password) {
 
 if(isset($_POST['inscription']))
 {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $telephone = $_POST['telephone'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $password_retype = $_POST['password_retype'];
+   $nom = $_POST['nom'];
+   $prenom = $_POST['prenom'];
+   $telephone = $_POST['telephone'];
+   $email = $_POST['email'];$password = hash('sha256', $_POST['password']);
+   $password = hash('sha256', $_POST['password']);
+   $password_retype = $_POST['password_retype'];
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
     

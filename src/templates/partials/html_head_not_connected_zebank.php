@@ -9,7 +9,7 @@
     
     <a href="../www/index_zebank.php"><img src="../logo.png"></a>
     <nav>
-        <a href="../inscription.php">S'INSCRIRE </a>
-        <a href="../connexion.php">SE CONNECTER </a>
+        <a href="../www/inscription.php">S'INSCRIRE </a>
+        <a href="../www/connexion.php">SE CONNECTER </a>
     </nav>
 </head>
