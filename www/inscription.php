@@ -25,9 +25,8 @@ if(isset($_POST['inscription']))
                 $new_member_form->prenom = $_POST['prenom'];
                 $new_member_form->telephone = $_POST['telephone'];
                 $new_member_form->email = $_POST['email'];
-                $new_member_form->password = $password;
+                $new_member_form->password = hash('sha256',$_POST['password']);
                 $idNewMember = $dbManager-> insert_advanced($new_member_form);
-                
                 header('Location:./connexion.php');
 
 }}
