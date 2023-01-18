@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Inscription';
-require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 function hash_password($password) {
     return password_hash($password, PASSWORD_DEFAULT);
 }

@@ -5,7 +5,6 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'depot';
-require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 if (isset($_POST['depot'])){
     $somme = $_POST['somme'];
     if ($somme != ''){

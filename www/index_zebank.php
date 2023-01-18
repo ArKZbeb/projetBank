@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Home page';
-require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 ?>
 <body>
 <div>

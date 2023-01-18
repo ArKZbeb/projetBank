@@ -1,7 +1,6 @@
 <?php
-    session_start();
+    require_once __DIR__ . '/../src/init.php';
     $page_title = 'account';
-    require_once __DIR__ . '/../www../src/templates/partials/html_head_zebank.php';
     ?>
     
     <body>

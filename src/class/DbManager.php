@@ -14,6 +14,9 @@ class DbManager {
     function __construct(PDO $db) {
         $this->db = $db;
     }
+    function isConnected() {
+        return $this->db != null;
+    }
 
     // return l'id inseré
     function insert(string $sql, array $data) {
