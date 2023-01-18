@@ -27,8 +27,12 @@ if(isset($_POST['inscription']))
                 $new_member_form->email = $_POST['email'];
                 $new_member_form->password = $password;
                 $idNewMember = $dbManager-> insert_advanced($new_member_form);
-                echo "inscription réussie";
+                // echo "inscription réussie";
                 
+                // // créer un compte pour le nouveau membre
+                // // $new_account_form = new bankAccount();
+                // // $new_account_form->id_user = $idNewMember;
+                // // $dbManager-> insert_advanced($new_account_form);
                 
                 header('Location:./connexion.php');
 
