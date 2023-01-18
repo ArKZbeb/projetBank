@@ -1,10 +1,14 @@
-<!-- faire une page d'inscription d'un utilisateur de la banque-->
 <?php
-session_start();
+
+require_once __DIR__ . '/../src/init.php';
+
 $page_title = 'Inscription';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+function hash_password($password) {
+    return password_hash($password, PASSWORD_DEFAULT);
+}
 
-if(isset($_POST['submit']))
+if(isset($_POST['inscription']))
 {
    $nom = $_POST['nom'];
    $prenom = $_POST['prenom'];
@@ -12,12 +16,18 @@ if(isset($_POST['submit']))
    $email = $_POST['email'];
    $password = $_POST['password'];
    $password_retype = $_POST['password_retype'];
+
    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
     
             if($password_retype == $password){
-                $sth = $dbh->prepare("INSERT INTO users (nom, prenom, telephone, email, mdp) VALUES (?, ?, ?, ?, ?)");
-                $sth->execute([$nom, $prenom, $telephone, $email, $password]);
-                $data = $sth->fetch();
+                $new_member_form = new users();
+                $new_member_form->nom = $_POST['nom'];
+                $new_member_form->prenom = $_POST['prenom'];
+                $new_member_form->telephone = $_POST['telephone'];
+                $new_member_form->email = $_POST['email'];
+                $new_member_form->password = $_POST['password'];
+                $idNewMember = $dbManager-> insert_advanced($new_member_form);
+                
                 header('Location:./connexion.php');
 
 }}
@@ -48,10 +58,14 @@ if(isset($_POST['submit']))
             </div>
             <div>
                 <label for="password">mot de passe</label>
-                <input type="text" name="password" id="password">
+                <input type="password" name="password" id="password">
             </div>
             <div>
-                <button type="submit">s'inscrire</button>
+                <label for="password">Confirmer votre mot de passe</label>
+                <input type="password" name="password_retype" id="password_retype">
+            </div>
+            <div>
+                <button type="submit" name="inscription">s'inscrire</button>
             </div>
         </form>
     </div>
