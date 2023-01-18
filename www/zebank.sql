@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mar. 17 jan. 2023 à 15:24
+-- Généré le : mer. 18 jan. 2023 à 10:40
 -- Version du serveur : 5.7.34
 -- Version de PHP : 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+01:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -90,9 +90,17 @@ CREATE TABLE `users` (
   `telephone` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL
+  `role` varchar(255) NOT NULL DEFAULT 'client',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id_user`, `nom`, `prenom`, `telephone`, `email`, `password`, `role`, `created_at`) VALUES
+(1, 'Turgy', 'Tirstan', 987654321, 'test@gmail.com', 'test', 'client', '2023-01-18 11:38:32'),
+(2, 'Turgy', 'Tirstan', 987654321, 'test@gmail.com', 'test', 'client', '2023-01-18 11:38:52');
 
 --
 -- Index pour les tables déchargées
@@ -131,17 +139,11 @@ ALTER TABLE `transaction`
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`),
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
---
--- AUTO_INCREMENT pour la table `bankaccount`
---
-ALTER TABLE `bankaccount`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `depot`
@@ -165,7 +167,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -190,12 +192,6 @@ ALTER TABLE `depot`
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`id_donator`) REFERENCES `bankaccount` (`id`),
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`id_receiver`) REFERENCES `bankaccount` (`id`);
-
---
--- Contraintes pour la table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_account`) REFERENCES `bankaccount` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
