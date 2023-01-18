@@ -14,16 +14,13 @@ require_once __DIR__ . '/class/DbManager.php';
 
 $dbManager = new DbManager($db);
 
+// $test = bin2hex(random_bytes(10));
+// echo $test;
+
 
 // utils
 require_once __DIR__ . '/utils/errors.php';
 
-// conditions connection db
 
-if ($dbManager->isConnected()) {
-    require_once __DIR__ .'/../src/templates/partials/html_head_connected_zebank.php';
-} else {
-    require_once __DIR__ . '/../src/templates/partials/html_head_not_connected_zebank.php';
-}
-?>
-<link rel="'style.css'">
+require_once __DIR__ . '/templates/partials/html_head_connected_zebank.php';
+

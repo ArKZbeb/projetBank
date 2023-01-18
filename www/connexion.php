@@ -14,10 +14,11 @@ if(isset($_POST['connexion'])){
         if($email != '' && $password != ''){
             $sth = $db->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
             $sth->execute([$email, $password]);
-            $donnees = $sth->fetch();
-        }
-        if($donnees != ""){
+        //     $donnees = $sth->fetch();
+        // }
+        // if($donnees != ""){
             header('Location:./index_zebank.php');
+            $_SESSION['connected'] = true;
         }
 }
 

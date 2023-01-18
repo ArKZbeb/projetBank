@@ -9,7 +9,16 @@
     
     <a href="../www/index_zebank.php"><img src="../logo.png"></a>
     <nav>
+    <?php if(!isset($_SESSION['connected'])){ ?>
+        <a href="../connexion.php">Se connecter </a>
+        <a href="../inscription.php">S'inscrire </a>
+    <?php } ?>
+
+
+        <?php if(isset($_SESSION['connected'])){ ?>
         <a href="../account/account.php">Mon compte </a>
-        <a href="../connexion.php">Se Déconnecter</a>
+        <a href="../logout.php">Se déconnecter </a>
+        <?php } ?>
+        
     </nav>
 </head>
