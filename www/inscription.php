@@ -36,7 +36,7 @@ if(isset($_POST['inscription']))
 else{
     echo "Veuillez remplir tous les champs";
 }
-
+?>
 <body>
     <div>
         <h1>Inscription</h1>
