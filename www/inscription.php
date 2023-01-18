@@ -21,8 +21,14 @@ if(isset($_POST['inscription']))
    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
     
             if($password_retype == $password){
-                $req = $db->prepare('INSERT INTO users(nom, prenom, telephone, email, password) VALUES(?, ?, ?, ?, ?)');
-                $req->execute([$nom, $prenom, $telephone, $email, $password]);
+                $new_member_form = new users();
+                $new_member_form->nom = $_POST['nom'];
+                $new_member_form->prenom = $_POST['prenom'];
+                $new_member_form->telephone = $_POST['telephone'];
+                $new_member_form->email = $_POST['email'];
+                $new_member_form->password = $_POST['password'];
+                $idNewMember = $dbManager-> insert_advanced($new_member_form);
+                
                 header('Location:./connexion.php');
 
 }}
