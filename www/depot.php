@@ -6,6 +6,15 @@ require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'depot';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+if (isset($_POST['depot'])){
+    $somme = $_POST['somme'];
+    if ($somme != ''){
+            $req = $db->prepare('INSERT INTO depot(somme) VALUES(?)');
+            $req->execute([$somme]);
+            header('Location:./index_zebank.php');
+    }
+
+}
 ?>
 
 <body>
@@ -15,10 +24,10 @@ require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
     <div>
         <form action="depot.php" method="post">
             <div>
-                <label for="prenom">montant</label>
+                <label for="prenom">somme</label>
                 <input type="int" name="somme" id="somme">
             </div>
-                <button type="submit">Déposer</button>
+                <button type="submit" name="depot">Déposer</button>
             </div>
         </form>
     </div>

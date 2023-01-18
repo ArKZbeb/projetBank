@@ -6,6 +6,16 @@ require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'transaction';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+
+if (isset($_POST['transaction'])){
+    $somme = $_POST['somme'];
+    if ($somme != ''){
+            $req = $db->prepare('INSERT INTO transaction(somme) VALUES(?)');
+            $req->execute([$somme]);
+            header('Location:./index_zebank.php');
+    }
+
+}
 ?>
 
 <body>
@@ -22,7 +32,7 @@ require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
                 <label for="prenom">somme</label>
                 <input type="int" name="somme" id="somme">
             </div>
-                <button type="submit">Envoyer</button>
+                <button type="submit" name="transaction">Envoyer</button>
             </div>
         </form>
     </div>
