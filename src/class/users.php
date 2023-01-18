@@ -1,6 +1,6 @@
 <?php
 
-class User extends DbObject {
+class users extends DbObject {
     public $id_user;
 	public $id_account;
 	public $nom;
@@ -10,6 +10,7 @@ class User extends DbObject {
 	public $password;
 	public $role;
 	public $created_at;
+}
 ?>
 
 <?php
@@ -23,4 +24,5 @@ class bankAccount extends DbObject {
 	public $password;
 	public $role;
 	public $created_at;
+}
 ?>
