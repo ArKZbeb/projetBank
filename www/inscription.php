@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Inscription';
-function hash_password($password) {
-    return password_hash($password, PASSWORD_DEFAULT);
+function hash_password($password){
+    return hash('sha256', $password);
 }
 
 if(isset($_POST['inscription']))
@@ -12,8 +12,8 @@ if(isset($_POST['inscription']))
    $nom = $_POST['nom'];
    $prenom = $_POST['prenom'];
    $telephone = $_POST['telephone'];
-   $email = $_POST['email'];$password = hash('sha256', $_POST['password']);
-   $password = hash('sha256', $_POST['password']);
+   $email = $_POST['email'];
+   $password = $_POST['password'];
    $password_retype = $_POST['password_retype'];
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -25,8 +25,10 @@ if(isset($_POST['inscription']))
                 $new_member_form->prenom = $_POST['prenom'];
                 $new_member_form->telephone = $_POST['telephone'];
                 $new_member_form->email = $_POST['email'];
-                $new_member_form->password = hash('sha256',$_POST['password']);
+                $new_member_form->password = $password;
                 $idNewMember = $dbManager-> insert_advanced($new_member_form);
+                echo "inscription réussie";
+                
                 
                 header('Location:./connexion.php');
 
