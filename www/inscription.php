@@ -3,6 +3,25 @@
 session_start();
 $page_title = 'Inscription';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+
+if(isset($_POST['submit']))
+{
+   $nom = $_POST['nom'];
+   $prenom = $_POST['prenom'];
+   $telephone = $_POST['telephone'];
+   $email = $_POST['email'];
+   $password = $_POST['password'];
+   $password_retype = $_POST['password_retype'];
+   if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+    
+            if($password_retype == $password){
+                $sth = $dbh->prepare("INSERT INTO users (nom, prenom, telephone, email, mdp) VALUES (?, ?, ?, ?, ?)");
+                $sth->execute([$nom, $prenom, $telephone, $email, $password]);
+                $data = $sth->fetch();
+                header('Location:./connexion.php');
+
+}}
+}
 ?>
 
 <body>

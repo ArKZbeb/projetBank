@@ -1,8 +1,11 @@
 <!-- faire une page de connexion d'un utilisateur de la banque-->
 <?php
-session_start();
+
+require_once __DIR__ . '/../src/init.php';
+
 $page_title = 'Connexion';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+
 ?>
 
 <body>
