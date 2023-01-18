@@ -10,14 +10,14 @@
     <a href="../www/index_zebank.php"><img src="../logo.png"></a>
     <nav>
     <?php if(!isset($_SESSION['connected'])){ ?>
-        <a href="../connexion.php">Se connecter </a>
-        <a href="../inscription.php">S'inscrire </a>
+        <a href="../www/connexion.php">SE CONNECTER </a>
+        <a href="../www/inscription.php">S'INSCRIRE </a>
     <?php } ?>
 
 
         <?php if(isset($_SESSION['connected'])){ ?>
-        <a href="../account/account.php">Mon compte </a>
-        <a href="../logout.php">Se déconnecter </a>
+        <a href="../www/account/account.php">MON COMPTE </a>
+        <a href="../www/logout.php">SE DECONNECTER </a>
         <?php } ?>
         
     </nav>

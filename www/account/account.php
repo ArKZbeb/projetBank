@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . '/../src/init.php';
+    require_once __DIR__ . '/../../src/init.php';
     $page_title = 'account';
     ?>
     
@@ -42,7 +42,7 @@
                 </div>
             </form>
         </div>
-        <?php require_once __DIR__ . '/../www../src/templates/partials/html_footer_zebank.php'; ?>
+        <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
     </body>
     
     </html>
