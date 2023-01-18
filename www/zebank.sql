@@ -85,7 +85,6 @@ CREATE TABLE `transaction` (
 
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
-  `id_account` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `telephone` int(11) NOT NULL,
@@ -133,7 +132,6 @@ ALTER TABLE `transaction`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `id_account` (`id_account`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées

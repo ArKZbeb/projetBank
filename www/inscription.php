@@ -23,7 +23,7 @@ if(isset($_POST['inscription']))
             if($password_retype == $password){
                 $req = $db->prepare('INSERT INTO users(nom, prenom, telephone, email, password) VALUES(?, ?, ?, ?, ?)');
                 $req->execute([$nom, $prenom, $telephone, $email, $password]);
-                header('Location:./index_zebank.php');
+                header('Location:./connexion.php');
 
 }}
 }

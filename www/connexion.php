@@ -13,7 +13,7 @@ if(isset($_POST['connexion'])){
     $password = $_POST['password'];
     
         if($email != '' && $password != ''){
-            $sth = $dbh->prepare('SELECT * FROM utilisateur WHERE email = ? AND mdp = ?');
+            $sth = $db->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
             $sth->execute([$email, $password]);
             $donnees = $sth->fetch();
             header('Location:./index_zebank.php');
@@ -35,7 +35,7 @@ if(isset($_POST['connexion'])){
             </div>
             <div>
                 <label for="password">mot de passe</label>
-                <input type="text" name="password" id="password">
+                <input type="password" name="password" id="password">
             </div>
             <div>
                 <button type="submit" name="connexion">se connecter</button>
