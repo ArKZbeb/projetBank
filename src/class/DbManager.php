@@ -19,7 +19,6 @@ class DbManager {
     function insert(string $sql, array $data) {
         $this->db->prepare($sql)
         ->execute($data);
-        return $this->db->lastInsertId();
     }
 
     function insert_advanced(DbObject $dbObj) {
@@ -47,12 +46,6 @@ class DbManager {
         return $hihi->fetchAll();
     }
 
-    function select(string $sql, array $data, string $className) {
-        $hihi = $this -> db -> prepare($sql);
-        $hihi->execute($data);
-        $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $hihi->fetchAll();
-    }
 
     function getById_advanced($id, string $className) {
         $class = strtolower($className);

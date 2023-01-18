@@ -6,6 +6,20 @@ require_once __DIR__ . '/../src/init.php';
 $page_title = 'Connexion';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 
+
+if(isset($_POST['connexion'])){
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+        if($email != '' && $password != ''){
+            $sth = $dbh->prepare('SELECT * FROM utilisateur WHERE email = ? AND mdp = ?');
+            $sth->execute([$email, $password]);
+            $donnees = $sth->fetch();
+            header('Location:./index_zebank.php');
+        }
+}
+
 ?>
 
 <body>
@@ -24,7 +38,7 @@ require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
                 <input type="text" name="password" id="password">
             </div>
             <div>
-                <button type="submit">se connecter</button>
+                <button type="submit" name="connexion">se connecter</button>
             </div>
         </form>
     </div>

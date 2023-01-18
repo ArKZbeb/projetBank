@@ -5,8 +5,11 @@ require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Inscription';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
+function hash_password($password) {
+    return password_hash($password, PASSWORD_DEFAULT);
+}
 
-if(isset($_POST['submit']))
+if(isset($_POST['inscription']))
 {
    $nom = $_POST['nom'];
    $prenom = $_POST['prenom'];
@@ -14,13 +17,13 @@ if(isset($_POST['submit']))
    $email = $_POST['email'];
    $password = $_POST['password'];
    $password_retype = $_POST['password_retype'];
+
    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
     
             if($password_retype == $password){
-                $sth = $dbh->prepare("INSERT INTO users (nom, prenom, telephone, email, mdp) VALUES (?, ?, ?, ?, ?)");
-                $sth->execute([$nom, $prenom, $telephone, $email, $password]);
-                $data = $sth->fetch();
-                header('Location:./connexion.php');
+                $req = $db->prepare('INSERT INTO users(nom, prenom, telephone, email, password) VALUES(?, ?, ?, ?, ?)');
+                $req->execute([$nom, $prenom, $telephone, $email, $password]);
+                header('Location:./index_zebank.php');
 
 }}
 }
@@ -50,10 +53,14 @@ if(isset($_POST['submit']))
             </div>
             <div>
                 <label for="password">mot de passe</label>
-                <input type="text" name="password" id="password">
+                <input type="password" name="password" id="password">
             </div>
             <div>
-                <button type="submit">s'inscrire</button>
+                <label for="password">Confirmer votre mot de passe</label>
+                <input type="password" name="password_retype" id="password_retype">
+            </div>
+            <div>
+                <button type="submit" name="inscription">s'inscrire</button>
             </div>
         </form>
     </div>
