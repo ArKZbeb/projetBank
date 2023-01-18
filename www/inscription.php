@@ -1,6 +1,8 @@
 <!-- faire une page d'inscription d'un utilisateur de la banque-->
 <?php
-session_start();
+
+require_once __DIR__ . '/../src/init.php';
+
 $page_title = 'Inscription';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 

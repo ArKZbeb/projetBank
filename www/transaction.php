@@ -1,7 +1,9 @@
 <!-- faire une page html permet de faire des transactions d'une banque-->
 
 <?php
-session_start();
+
+require_once __DIR__ . '/../src/init.php';
+
 $page_title = 'transaction';
 require_once __DIR__ . '/../src/templates/partials/html_head_zebank.php';
 ?>
