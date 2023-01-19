@@ -11,7 +11,7 @@ if (isset($_POST['transaction'])){
     if ($somme != ''){
             $req = $db->prepare('INSERT INTO transaction(somme) VALUES(?)');
             $req->execute([$somme]);
-            header('Location:./index_zebank.php');
+            header('Location:./accueil_compte.php');
     }
 
 }
@@ -32,7 +32,7 @@ if (isset($_POST['transaction'])){
                 <label for="prenom">somme</label>
                 <input type="int" name="somme" id="somme">
             </div>
-                <button type="submit" name="transaction">Envoyer</button>
+                <button type="submit" name="transaction">Transférer</button>
             </div>
         </form>
     </div>

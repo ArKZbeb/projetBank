@@ -5,6 +5,7 @@
 require_once __DIR__ . '/../../src/init.php';
 
 $page_title = 'depot';
+$user_id = $_POST['id_user'];
 if (isset($_POST['depot'])){
     $somme = $_POST['somme'];
     if (is_numeric($somme) && $somme > 0) {
@@ -40,7 +41,11 @@ if (isset($_POST['depot'])){
     <div>
         <form action="depot.php" method="post">
             <div>
-                <label for="prenom">somme</label>
+                <label for="id_user">id_user</label>
+                <input type="int" name="id_user" id="id_user">
+            </div>
+            <div>
+                <label for="somme">somme</label>
                 <input type="int" name="somme" id="somme">
             </div>
                 <button type="submit" name="depot">Déposer</button>
