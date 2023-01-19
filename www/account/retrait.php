@@ -1,9 +1,10 @@
 <?php
-require_once __DIR__ . '/../src/init.php';
+require_once __DIR__ . '/../../src/init.php';
 $page_title = 'retrait';
 ?>
 
 <body>
+<link rel="stylesheet" href="../../src/style.css">
     <div>
         <h1>Retrait</h1>
     </div>
@@ -17,7 +18,7 @@ $page_title = 'retrait';
             </div>
         </form>
     </div>
-    <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
+    <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
 
 </html>

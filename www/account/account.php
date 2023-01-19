@@ -23,6 +23,7 @@ echo "</table>";
 ?>
 
     <body>
+    <link rel="stylesheet" href="../../src/style.css">
         <head>
              <link rel="stylesheet" href="account.css">
              <link rel="stylesheet" href="/../../src/style.css">

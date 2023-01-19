@@ -26,7 +26,7 @@ if(isset($_POST['inscription']))
                 // // $new_account_form = new bankAccount();
                 // // $new_account_form->id_user = $idNewMember;
                 // // $dbManager-> insert_advanced($new_account_form);
-                header('Location:./connexion.php');
+                header('Location:./attente.php');
 
 }}
 }

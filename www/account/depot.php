@@ -2,7 +2,7 @@
 
 <?php
 
-require_once __DIR__ . '/../src/init.php';
+require_once __DIR__ . '/../../src/init.php';
 
 $page_title = 'depot';
 if (isset($_POST['depot'])){
@@ -33,6 +33,7 @@ if (isset($_POST['depot'])){
 ?>
 
 <body>
+<link rel="stylesheet" href="../../src/style.css">
     <div>
         <h1>Dépôt</h1>
     </div>
@@ -46,7 +47,7 @@ if (isset($_POST['depot'])){
             </div>
         </form>
     </div>
-    <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
+    <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
 
 </html>
