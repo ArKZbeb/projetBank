@@ -8,13 +8,24 @@ $page_title = 'transaction';
 
 if (isset($_POST['transaction'])){
     $somme = $_POST['somme'];
-    if ($somme != ''){
-            $req = $db->prepare('INSERT INTO transaction(somme) VALUES(?)');
-            $req->execute([$somme]);
-            header('Location:./accueil_compte.php');
-    }
+    $id_donator = $_POST['id_donator'];
+    $id_receiver = $_POST['id_receiver'];
+if ($somme != '') {
+        // Effectuer le dépôt
+        // $req = $db->prepare('INSERT INTO depot(id_user,somme) WHERE id_user = ? AND somme = ?');
+        // $req->execute([$id_user, $somme]);
 
-}
+        // Enregistrer la transaction dans la table transactions
+        $req = $db->prepare('INSERT INTO transaction(id_donator, id_receiver, somme) VALUES(?, ?, ?)');
+        $req->execute([$id_donator, $id_receiver, $somme]);
+
+            $message = 'Votre transaction a été effectuée avec succès.';
+        } else {
+            $message = 'Le solde de votre compte est insuffisant pour effectuer cette transaction.';
+        }
+    } else {
+        $message = 'Veuillez entrer une somme valide.';
+    }
 ?>
 
 <body>
@@ -24,9 +35,13 @@ if (isset($_POST['transaction'])){
     </div>
     <div>
         <form action="transaction.php" method="post">
+        <div>
+                <label for="dona">ID donateur</label>
+                <input type="int" name="id_donator" id="id_donator">
+            </div>
             <div>
-                <label for="nom">ID receveur</label>
-                <input type="int" name="id_receveur" id="id_receveur">
+                <label for="recev">ID receveur</label>
+                <input type="int" name="id_receiver" id="id_receiver">
             </div>
             <div>
                 <label for="prenom">somme</label>

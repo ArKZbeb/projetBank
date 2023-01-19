@@ -5,23 +5,17 @@
 require_once __DIR__ . '/../../src/init.php';
 
 $page_title = 'depot';
-$user_id = $_POST['id_user'];
 if (isset($_POST['depot'])){
     $somme = $_POST['somme'];
-    if (is_numeric($somme) && $somme > 0) {
-        // Vérifier que le solde du compte est suffisant pour effectuer le dépôt
-        $req = $db->prepare('SELECT somme FROM depot WHERE id = ?');
-        $req->execute([$user_id]);
-        $solde = $req->fetchColumn();
+    $id_user = $_POST['id_user'];
+if ($somme != '') {
+        // Effectuer le dépôt
+        // $req = $db->prepare('INSERT INTO depot(id_user,somme) WHERE id_user = ? AND somme = ?');
+        // $req->execute([$id_user, $somme]);
 
-        if ($somme <= $solde) {
-            // Effectuer le dépôt
-            $req = $db->prepare('UPDATE depot SET somme = solde + ? WHERE id = ?');
-            $req->execute([$somme, $user_id]);
-
-            // Enregistrer la transaction dans la table transactions
-            $req = $db->prepare('INSERT INTO transactions(user_id, type, somme) VALUES(?, ?, ?)');
-            $req->execute([$user_id, 'depot', $somme]);
+        // Enregistrer la transaction dans la table transactions
+        $req = $db->prepare('INSERT INTO depot(id_user,somme) VALUES(?, ?)');
+        $req->execute([$id_user, $somme]);
 
             $message = 'Votre dépôt a été effectué avec succès.';
         } else {
@@ -30,7 +24,6 @@ if (isset($_POST['depot'])){
     } else {
         $message = 'Veuillez entrer une somme valide.';
     }
-}
 ?>
 
 <body>

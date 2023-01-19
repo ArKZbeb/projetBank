@@ -45,7 +45,7 @@ CREATE TABLE `bankaccount` (
 
 CREATE TABLE `depot` (
   `id` int(11) NOT NULL,
-  `id_donator` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `somme` int(11) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -58,7 +58,7 @@ CREATE TABLE `depot` (
 
 CREATE TABLE `retrait` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_receiver` int(11) NOT NULL,
   `somme` int(11) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
