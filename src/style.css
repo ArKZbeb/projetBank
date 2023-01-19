@@ -26,3 +26,26 @@ img{
 p{
     text-align: center;
 }
+
+input{
+    
+}
+button{
+    position: fixed;
+    width: 60px;
+    height: 30px;
+    background-color: yellowgreen;
+    display: flex;
+    color: black;
+    font-size: 10px;
+    margin-left: 45%;
+    border-radius: 5px;
+    
+}
+footer{
+    position: fixed;
+    bottom: 0%;
+}
+form{
+    text-align: center;
+}

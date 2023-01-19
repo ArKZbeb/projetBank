@@ -9,8 +9,7 @@ $page_title = 'Connexion';
 if(isset($_POST['connexion'])){
 
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    
+    $password = hash('sha256', $_POST['password']);
         if($email != '' && $password != ''){
             $sth = $db->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
             $sth->execute([$email, $password]);

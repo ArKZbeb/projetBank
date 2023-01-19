@@ -1,9 +1,32 @@
 <?php
-    require_once __DIR__ . '/../../src/init.php';
-    $page_title = 'account';
-    ?>
-    
+
+require_once __DIR__ . '/../../src/init.php';
+$page_title = 'account';
+
+// Récupération des données de la table "users"
+$query = 'SELECT * FROM users';
+$stmt = $pdo->prepare($query);
+$stmt->execute();
+$users = $stmt->fetchAll();
+
+// Affichage des données dans la page
+echo "<table>";
+echo "<tr><th>ID</th><th>Nom</th><th>Email</th></tr>";
+foreach ($users as $user) {
+    echo "<tr>";
+    echo "<td>" . $user['id'] . "</td>";
+    echo "<td>" . $user['name'] . "</td>";
+    echo "<td>" . $user['email'] . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+?>
+
     <body>
+        <head>
+             <link rel="stylesheet" href="account.css">
+             <link rel="stylesheet" href="/../../src/style.css">
+        </head>
         <div>
             <h1>Mon compte</h1>
         </div>
@@ -21,28 +44,16 @@
                     <label for="mail">Email</label>
                     <input type="text" name="email" id="email">
                 </div>
+
                 <div>
-                    <label for="password">Mot de passe</label>
-                    <input type="text" name="mdp" id="mdp">
-                </div>
-                <div>
-                    <label for="compte">Solde</label>
-                    <input type="int" name="solde" id="solde">
-                </div>
-                <div>
-                    <label for="compte">Compte Checque</label>
-                    <input type="int" name="solde" id="solde">
-                </div>
-                <div>
-                    <label for="compte">Livret A</label>
-                    <input type="int" name="solde" id="solde">
-                <div>
-                    <label for="compte">Compte Epargne</label>
-                    <input type="int" name="solde" id="solde">
-                </div>
+            <form>
+                <select name="comptes">
+                    <option value="compte_cheque">Compte chèque</option>
+                    <option value="livret_A">Livret A</option>
+                    <option value="compte_epargne">Compte épargne</option>
+                </select>
             </form>
         </div>
         <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
     </body>
-    
-    </html>
+</html>
