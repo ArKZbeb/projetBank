@@ -4,7 +4,9 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Connexion';
-
+if (isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+    header('Location:./accueil_compte.php');
+}
 
 if(isset($_POST['connexion'])){
 
@@ -15,9 +17,12 @@ if(isset($_POST['connexion'])){
             $sth->execute([$email, $password]);
             $donnees = $sth->fetch();
         }
-        if($donnees != ""){
-            header('Location:./accueil_compte.php');
+        if($donnees != false){
             $_SESSION['connected'] = true;
+            $_SESSION['id'] = $donnees['id_user'];
+            
+            header('Location:./accueil_compte.php');
+            
         }
 }
 

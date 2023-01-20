@@ -3,33 +3,32 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'retrait';
-$id_user = $_POST['id_user'];
 if (isset($_POST['retrait'])){
-    $somme = $_POST['somme'];
-    if (is_numeric($somme) && $somme > 0) {
+    $id_user = $_SESSION['id'];
+    $montant = $_POST['montant'];
+    if (is_numeric($montant) && $montant > 0) {
         // Vérifier que le solde du compte est suffisant pour effectuer le dépôt
-        $req = $db->prepare('SELECT somme FROM depot WHERE id = ?');
-        $req->execute([$id_user]);
-        $solde = $req->fetch();
         
+            $req = $db->prepare('INSERT INTO retrait(id_user,montant) VALUES(?, ?)');
 
-        if ($somme != '') {
-            // Effectuer le dépôt
-            $req = $db->prepare('UPDATE retrait SET somme = solde - ? WHERE id = ?');
-            $req->execute([$somme, $id_user]);
-            echo "ta mere";
-            // Enregistrer la transaction dans la table transaction
-            $req = $db->prepare('INSERT INTO transaction(id_user, type, somme) VALUES(?, ?, ?)');
-            $req->execute([$id_user, 'retrait', $somme]);
+            $req->execute([$id_user, $montant]);
+            
 
-            $message = 'Votre retrait a été effectué avec succès.';
-        } else {
+            $req2 =$db -> prepare('SELECT * FROM bankaccount WHERE id_user = ?');
+            $req2->execute([$id_user]);
+            $bankAccount = $req2->fetch();
+            $userMoney = $bankAccount['euro'];
+
+            $don = $userMoney - $montant;
+
+            $var2 = $db-> prepare('UPDATE bankaccount SET euro = ? WHERE id_user = ?');
+            $var2 -> execute([$don, $id_user]);
+            echo 'Votre transaction a été effectuée avec succès.';
+        }else {
             $message = 'Le solde de votre compte est insuffisant pour effectuer ce dépôt.';
+            echo $message;
         }
-    } else {
-        $message = 'Veuillez entrer une somme valide.';
     }
-}
 ?>
 <body>
     <div>
@@ -38,12 +37,8 @@ if (isset($_POST['retrait'])){
     <div>
         <form action="retrait.php" method="post">
             <div>
-                <label for="id_user">id_user</label>
-                <input type="int" name="id_user" id="id_user">
-            </div>
-            <div>
-                <label for="compte">somme</label>
-                <input type="int" name="somme" id="somme">
+                <label for="compte">montant</label>
+                <input type="int" name="montant" id="montant">
             </div>
                 <button type="submit" name="retrait">Retirer</button>
             </div>

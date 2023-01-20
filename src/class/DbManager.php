@@ -49,13 +49,27 @@ class DbManager {
         $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
         return $hihi->fetchAll();
     }
+    function select_advanced(string $className) {
+        $class = strtolower($className);
+        $hihi = $this -> db -> prepare('SELECT * FROM ' . $class);
+        $hihi->execute();
+        $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
+        return $hihi->fetchAll();
+    }
+    function getByTable(string $tableName, string $className) {
+        $hihi = $this -> db -> prepare('SELECT * FROM ' . $tableName);
+        $hihi->execute();
+        $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
+        return $hihi->fetchAll();
+        
+    }
 
     function getById_advanced($id, string $className) {
         $class = strtolower($className);
-        $hihi = $this -> db -> prepare('SELECT * FROM ' . $class . ' WHERE id = ?');
+        $hihi = $this -> db -> prepare('SELECT * FROM ' . $class . ' WHERE id_user = ?');
         $hihi->execute([$id]);
         $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $hihi->fetchAll();
+        return $hihi->fetch();
     }
 
     function getBy(string $tableName, string $column, $value, string $className) {

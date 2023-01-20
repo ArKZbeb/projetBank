@@ -48,3 +48,9 @@ form{
 h2{
     text-align: center;
 }
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

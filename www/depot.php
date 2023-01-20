@@ -5,31 +5,31 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'depot';
-if (isset($_POST['depot'])){
-    $somme = $_POST['somme'];
-    $id_user = $_POST['id_user'];
-    $devise = $_POST['devise'];
-if ($somme != '') {
-        // Effectuer le dépôt
-        // $req = $db->prepare('INSERT INTO depot(id_user,somme) WHERE id_user = ? AND somme = ?');
-        // $req->execute([$id_user, $somme]);
+if (isset($_POST['somme'])){
+    $id_user = $_SESSION['id'];
+    $montant = $_POST['somme'];
+    
+        // Vérifier que le solde du compte est suffisant pour effectuer le dépôt
+        
+            $req = $db->prepare('INSERT INTO depot(id_user,somme) VALUES(?, ?)');
+            $req->execute([$id_user, $montant]);
+            
 
-        // Enregistrer la transaction dans la table transactions
-        $req = $db->prepare('INSERT INTO depot(id_user,somme, devise) VALUES(?, ?, ?)');
-        $req->execute([$id_user, $somme, $devise]);
-        $req = $db->prepare('INSERT INTO transaction(id_user,somme) VALUES(?, ?)');
-        $req->execute([$id_user, $somme]);
-        $req = $db->prepare('INSERT INTO bankaccount(id_user,somme) VALUES(?, ?)');
-        $req->execute([$id_user, $somme]);
+            $req2 =$db -> prepare('SELECT * FROM bankaccount WHERE id_user = ?');
+            $req2->execute([$id_user]);
+            $bankAccount = $req2->fetch();
+            $userMoney = $bankAccount['euro'];
 
-            $message = 'Votre dépôt a été effectué avec succès.';
-            echo $message;
-        } else {
+            $don = $userMoney + $montant;
+
+            $var2 = $db-> prepare('UPDATE bankaccount SET euro = ? WHERE id_user = ?');
+            $var2 -> execute([$don, $id_user]);
+            echo 'Votre transaction a été effectuée avec succès.';
+        }else {
             $message = 'Le solde de votre compte est insuffisant pour effectuer ce dépôt.';
+            echo $message;
         }
-    } else {
-        $message = 'Veuillez entrer une somme valide.';
-    }
+    
 ?>
 
 <body>
@@ -39,16 +39,8 @@ if ($somme != '') {
     <div>
         <form action="depot.php" method="post">
             <div>
-                <label for="id_user">id_user</label>
-                <input type="int" name="id_user" id="id_user">
-            </div>
-            <div>
                 <label for="somme">somme</label>
                 <input type="int" name="somme" id="somme">
-            </div>
-            <div>
-                <label for="devise">devise</label>
-                <input type="text" name="devise" id="devise">
             </div>
                 <button type="submit" name="depot">Déposer</button>
             </div>
