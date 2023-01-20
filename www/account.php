@@ -1,25 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../../src/init.php';
+require_once __DIR__ . '/../src/init.php';
 $page_title = 'account';
 
 // Récupération des données de la table "users"
-$query = 'SELECT * FROM users';
-$stmt = $pdo->prepare($query);
-$stmt->execute();
-$users = $stmt->fetchAll();
+
+
 
 // Affichage des données dans la page
-echo "<table>";
-echo "<tr><th>ID</th><th>Nom</th><th>Email</th></tr>";
-foreach ($users as $user) {
-    echo "<tr>";
-    echo "<td>" . $user['id'] . "</td>";
-    echo "<td>" . $user['name'] . "</td>";
-    echo "<td>" . $user['email'] . "</td>";
-    echo "</tr>";
-}
-echo "</table>";
+
 ?>
 
     <body>
@@ -35,15 +24,15 @@ echo "</table>";
             <form action="account.php" method="post">
                 <div>
                     <label for="nom">Nom</label>
-                    <input type="text" name="nom" id="nom">
+                    <?php echo $_SESSION['nom'] ?>
                 </div>
                 <div>
                     <label for="prenom">Prenom</label>
-                    <input type="text" name="prenom" id="prenom">
+                    <?php echo $_SESSION['prenom'] ?>
                 </div>
                 <div>
                     <label for="mail">Email</label>
-                    <input type="text" name="email" id="email">
+                    <?php echo $_SESSION['email'] ?>
                 </div>
 
                 <div>

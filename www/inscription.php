@@ -3,6 +3,9 @@
 require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'Inscription';
+function hash_password($password){
+    return hash('sha256', $password);
+}
 
 if(isset($_POST['inscription']))
 {
@@ -10,11 +13,12 @@ if(isset($_POST['inscription']))
    $prenom = $_POST['prenom'];
    $telephone = $_POST['telephone'];
    $email = $_POST['email'];
-   $password = hash('sha256',$_POST['password']);
+   $password = $_POST['password'];
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-
+    
             if($password!= ''){
+                $password = hash_password($password);
                 $new_member_form = new users();
                 $new_member_form->nom = $_POST['nom'];
                 $new_member_form->prenom = $_POST['prenom'];
@@ -22,11 +26,8 @@ if(isset($_POST['inscription']))
                 $new_member_form->email = $_POST['email'];
                 $new_member_form->password = $password;
                 $idNewMember = $dbManager-> insert_advanced($new_member_form);
-                // // créer un compte pour le nouveau membre
-                // // $new_account_form = new bankAccount();
-                // // $new_account_form->id_user = $idNewMember;
-                // // $dbManager-> insert_advanced($new_account_form);
-                header('Location:./attente.php');
+                echo "inscription réussie";
+                header('Location:./create_account.php');
 
 }}
 }

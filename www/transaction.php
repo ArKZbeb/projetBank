@@ -2,13 +2,13 @@
 
 <?php
 
-require_once __DIR__ . '/../../src/init.php';
+require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'transaction';
 
 if (isset($_POST['transaction'])){
     $somme = $_POST['somme'];
-    $id_donator = $_POST['id_donator'];
+    $id_user = $_POST['id_user'];
     $id_receiver = $_POST['id_receiver'];
 if ($somme != '') {
         // Effectuer le dépôt
@@ -16,8 +16,8 @@ if ($somme != '') {
         // $req->execute([$id_user, $somme]);
 
         // Enregistrer la transaction dans la table transactions
-        $req = $db->prepare('INSERT INTO transaction(id_donator, id_receiver, somme) VALUES(?, ?, ?)');
-        $req->execute([$id_donator, $id_receiver, $somme]);
+        $req = $db->prepare('INSERT INTO transaction(id_user, id_receiver, somme) VALUES(?, ?, ?)');
+        $req->execute([$id_user, $id_receiver, $somme]);
 
             $message = 'Votre transaction a été effectuée avec succès.';
         } else {
@@ -29,15 +29,14 @@ if ($somme != '') {
 ?>
 
 <body>
-<link rel="stylesheet" href="../../src/style.css">
     <div>
         <h1>Transaction</h1>
     </div>
     <div>
         <form action="transaction.php" method="post">
         <div>
-                <label for="dona">ID donateur</label>
-                <input type="int" name="id_donator" id="id_donator">
+                <label for="user">ID user</label>
+                <input type="int" name="id_user" id="id_user">
             </div>
             <div>
                 <label for="recev">ID receveur</label>
@@ -51,7 +50,7 @@ if ($somme != '') {
             </div>
         </form>
     </div>
-    <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
+    <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
 
 </html>

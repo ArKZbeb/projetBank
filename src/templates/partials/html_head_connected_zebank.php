@@ -16,7 +16,7 @@
 
     
         <?php if(isset($_SESSION['connected'])){ ?>
-        <a href="../www/account/account.php">MON COMPTE </a>
+        <a href="../www/account.php">MON COMPTE </a>
         <a href="../www/logout.php">SE DECONNECTER </a>
         <?php } ?>
         

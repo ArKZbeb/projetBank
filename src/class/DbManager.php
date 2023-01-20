@@ -178,5 +178,21 @@ class DbManager {
         $sql .= ')';
         $this->insert($sql, $values);
     }
+        //faire une fonction select id qui recupère uniquement le dernier id_user de la table users et le renvoie
+        function selectLastId($tableName){
+            $sql = "SELECT max(id_user) FROM $tableName";
+            $req = $this->db->query($sql);
+            $result = $req->fetch();
+            return $result;
+        }
+    
+       
+        
+        function selectConnectedId($tableName, $email){
+            $sql = "SELECT id_user FROM $tableName WHERE email = $email";
+            $req = $this->db->query;
+            $result = $req->fetch();
+            return $result;
+        }
 
 }

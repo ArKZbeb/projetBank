@@ -2,22 +2,28 @@
 
 <?php
 
-require_once __DIR__ . '/../../src/init.php';
+require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'depot';
 if (isset($_POST['depot'])){
     $somme = $_POST['somme'];
     $id_user = $_POST['id_user'];
+    $devise = $_POST['devise'];
 if ($somme != '') {
         // Effectuer le dépôt
         // $req = $db->prepare('INSERT INTO depot(id_user,somme) WHERE id_user = ? AND somme = ?');
         // $req->execute([$id_user, $somme]);
 
         // Enregistrer la transaction dans la table transactions
-        $req = $db->prepare('INSERT INTO depot(id_user,somme) VALUES(?, ?)');
+        $req = $db->prepare('INSERT INTO depot(id_user,somme, devise) VALUES(?, ?, ?)');
+        $req->execute([$id_user, $somme, $devise]);
+        $req = $db->prepare('INSERT INTO transaction(id_user,somme) VALUES(?, ?)');
+        $req->execute([$id_user, $somme]);
+        $req = $db->prepare('INSERT INTO bankaccount(id_user,somme) VALUES(?, ?)');
         $req->execute([$id_user, $somme]);
 
             $message = 'Votre dépôt a été effectué avec succès.';
+            echo $message;
         } else {
             $message = 'Le solde de votre compte est insuffisant pour effectuer ce dépôt.';
         }
@@ -27,7 +33,6 @@ if ($somme != '') {
 ?>
 
 <body>
-<link rel="stylesheet" href="../../src/style.css">
     <div>
         <h1>Dépôt</h1>
     </div>
@@ -41,11 +46,15 @@ if ($somme != '') {
                 <label for="somme">somme</label>
                 <input type="int" name="somme" id="somme">
             </div>
+            <div>
+                <label for="devise">devise</label>
+                <input type="text" name="devise" id="devise">
+            </div>
                 <button type="submit" name="depot">Déposer</button>
             </div>
         </form>
     </div>
-    <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
+    <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
 
 </html>

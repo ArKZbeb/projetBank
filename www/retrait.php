@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../src/init.php';
+require_once __DIR__ . '/../src/init.php';
 
 $page_title = 'retrait';
 $id_user = $_POST['id_user'];
@@ -8,16 +8,16 @@ if (isset($_POST['retrait'])){
     $somme = $_POST['somme'];
     if (is_numeric($somme) && $somme > 0) {
         // Vérifier que le solde du compte est suffisant pour effectuer le dépôt
-        $req = $db->prepare('SELECT somme FROM retrait WHERE id = ?');
+        $req = $db->prepare('SELECT somme FROM depot WHERE id = ?');
         $req->execute([$id_user]);
         $solde = $req->fetch();
         
 
-        if ($somme <= $solde) {
+        if ($somme != '') {
             // Effectuer le dépôt
             $req = $db->prepare('UPDATE retrait SET somme = solde - ? WHERE id = ?');
             $req->execute([$somme, $id_user]);
-
+            echo "ta mere";
             // Enregistrer la transaction dans la table transaction
             $req = $db->prepare('INSERT INTO transaction(id_user, type, somme) VALUES(?, ?, ?)');
             $req->execute([$id_user, 'retrait', $somme]);
@@ -32,7 +32,6 @@ if (isset($_POST['retrait'])){
 }
 ?>
 <body>
-<link rel="stylesheet" href="../../src/style.css">
     <div>
         <h1>Retrait</h1>
     </div>
@@ -50,7 +49,7 @@ if (isset($_POST['retrait'])){
             </div>
         </form>
     </div>
-    <?php require_once __DIR__ . '/../../src/templates/partials/html_footer_zebank.php'; ?>
+    <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
 
 </html>
