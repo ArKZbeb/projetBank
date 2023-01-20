@@ -44,6 +44,7 @@ $page_title = 'account';
                 </select>
             </form>
         </div>
+        
         <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
     </body>
 </html>
