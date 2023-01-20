@@ -14,11 +14,11 @@ $page_title = 'Home page';
     </p>
 
 <block class="block">
-    <h2><a href="../www/retrait.php">RETRAIT</a></h2>
+    <h2><a href="../retrait.php">RETRAIT</a></h2>
 </br>
-<h2><a href="../www/transaction.php">TRANSACTION</a></h2>
+<h2><a href="../transaction.php">TRANSACTION</a></h2>
 </br>
-<h2><a href="../www/depot.php">DEPOT</a></h2>
+<h2><a href="../depot.php">DEPOT</a></h2>
 </block>
 <?php require_once __DIR__ . '/../src/templates/partials/html_footer_zebank.php'; ?>
 </body>
