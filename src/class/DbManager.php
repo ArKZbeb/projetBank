@@ -115,26 +115,6 @@ class DbManager {
         $hihi ->execute($data);
     }
 
-    // function update(string $tableName, array $data)
-    // {
-    //     $sql = "UPDATE " . $tableName . " SET ";
-    //     foreach ($data as $key => $value) {
-    //         if ($key != 'id') {
-    //             $sql .= $key . " = ?, ";
-    //         }
-    //     }
-    //     $sql = substr($sql, 0, -2) . " WHERE id = ?"; // substr($sql, 0, -2) remove last comma
-
-    //     $id = $data['id'];
-    //     $data = array_values($data);
-    //     $data[] = $id;
-    //     array_shift($data); // remove first element
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute($data);
-    //     return $id;
-    // }
-
-
     function update_advanced(DbObject $dbObj) {
         $tableName = strtolower(get_class($dbObj));
         echo $tableName;
