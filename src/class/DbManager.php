@@ -52,10 +52,10 @@ class DbManager {
 
     function getById_advanced($id, string $className) {
         $class = strtolower($className);
-        $hihi = $this -> db -> prepare('SELECT * FROM ' . $class . ' WHERE id = ?');
+        $hihi = $this -> db -> prepare('SELECT * FROM ' . $class . ' WHERE id_user = ?');
         $hihi->execute([$id]);
         $hihi->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $hihi->fetchAll();
+        return $hihi->fetch();
     }
 
     function getBy(string $tableName, string $column, $value, string $className) {
