@@ -12,6 +12,8 @@
     <?php if(!isset($_SESSION['connected'])){ ?>
         <a href="../connexion.php">SE CONNECTER </a>
         <a href="../inscription.php">S'INSCRIRE </a>
+        <a href="../connexion.php">SE CONNECTER </a>
+        <a href="../inscription.php">S'INSCRIRE </a>
     <?php } ?>
 
     
